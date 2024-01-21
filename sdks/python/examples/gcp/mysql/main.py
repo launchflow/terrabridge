@@ -1,10 +1,11 @@
 import datetime
 import uuid
-from terrabridge.gcp import CloudSQLDatabase, CloudSQLUser
 
 from sqlalchemy import Column, DateTime, Integer, select
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.orm import DeclarativeBase
+
+from terrabridge.gcp import CloudSQLDatabase, CloudSQLUser
 
 
 class Base(AsyncAttrs, DeclarativeBase):

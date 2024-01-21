@@ -1,4 +1,5 @@
 from typing import Optional
+
 import sqlalchemy
 from google.cloud.sql.connector import IPTypes
 

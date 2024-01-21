@@ -1,5 +1,6 @@
-from mock import patch, ANY
-from terrabridge.gcp.cloud_sql import CloudSQLInstance, CloudSQLDatabase, CloudSQLUser
+from mock import ANY, patch
+
+from terrabridge.gcp.cloud_sql import CloudSQLDatabase, CloudSQLInstance, CloudSQLUser
 
 # TODO: add tests for sqlalchemy_engine and async_sqlalchemy_engine
 

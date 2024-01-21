@@ -4,12 +4,12 @@ from terrabridge.gcp.base import GCPResource
 
 try:
     import asyncpg
-    from sqlalchemy import create_engine, Engine, engine
-    from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine
-    from google.cloud.sql.connector import Connector, IPTypes, create_async_connector
-    import pytds
     import pg8000
     import pymysql
+    import pytds
+    from google.cloud.sql.connector import Connector, IPTypes, create_async_connector
+    from sqlalchemy import Engine, create_engine, engine
+    from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 except ImportError:
     asyncpg = None
     create_engine = None
@@ -121,8 +121,8 @@ class CloudSQLDatabase(GCPResource):
     ) -> Engine:
         """Returns a SQLAlchemy engine for the database.
 
-        Requires terrabridge[gcp] and sqlalchemy to be installed, and whatever driver is needed
-        for the database version.
+        Requires terrabridge[gcp] and sqlalchemy to be installed, and whatever
+        driver is needed for the database version.
             POSTGRES: pg8000
             SQLSERVER: pytds
 
@@ -136,30 +136,35 @@ class CloudSQLDatabase(GCPResource):
         """
         if create_engine is None:
             raise ImportError(
-                "SQLAlchemy is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "SQLAlchemy is not installed. Please install it with "
+                "`pip install terrabridge[gcp]`."
             )
         if Connector is None:
             raise ImportError(
-                "google-cloud-sql-connector is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "google-cloud-sql-connector is not installed. "
+                "Please install it with `pip install terrabridge[gcp]`."
             )
         if self.cloud_sql_instance.database_version.startswith("MYSQL"):
             if pymysql is None:
                 raise ImportError(
-                    "pymsql is not installed. Please install it with `pip install pymysql`."
+                    "pymsql is not installed. Please install it "
+                    "with `pip install pymysql`."
                 )
             driver = "pymysql"
             url = "mysql+pymysql://"
         elif self.cloud_sql_instance.database_version.startswith("POSTGRES"):
             if pg8000 is None:
                 raise ImportError(
-                    "pg8000 is not installed. Please install it with `pip install pg8000`."
+                    "pg8000 is not installed. Please install it "
+                    "with `pip install pg8000`."
                 )
             driver = "pg8000"
             url = "postgresql+pg8000://"
         elif self.cloud_sql_instance.database_version.startswith("SQLSERVER"):
             if pytds is None:
                 raise ImportError(
-                    "pytds is not installed. Please install it with `pip install pytds`."
+                    "pytds is not installed. Please install it "
+                    "with `pip install pytds`."
                 )
             driver = "pytds"
             url = "mssql+pytds://"
@@ -198,11 +203,13 @@ class CloudSQLDatabase(GCPResource):
         """
         if create_async_engine is None:
             raise ImportError(
-                "SQLAlchemy asyncio extension is not installed. Please install it with `pip install sqlalchemy[asyncio]`."
+                "SQLAlchemy asyncio extension is not installed. "
+                "Please install it with `pip install sqlalchemy[asyncio]`."
             )
         if Connector is None:
             raise ImportError(
-                "google-cloud-sql-connector is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "google-cloud-sql-connector is not installed. "
+                "Please install it with `pip install terrabridge[gcp]`."
             )
         connector = await create_async_connector()
 
@@ -211,7 +218,8 @@ class CloudSQLDatabase(GCPResource):
         elif self.cloud_sql_instance.database_version.startswith("POSTGRES"):
             if asyncpg is None:
                 raise ImportError(
-                    "asyncpg is not installed. Please install it with `pip install asyncpg`."
+                    "asyncpg is not installed. Please install "
+                    "it with `pip install asyncpg`."
                 )
             driver = "asyncpg"
             url = "postgresql+asyncpg://"

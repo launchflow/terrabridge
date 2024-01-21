@@ -1,4 +1,5 @@
 from typing import Dict
+
 from terrabridge.gcp.base import GCPResource
 
 try:
@@ -37,7 +38,8 @@ class PubSubLiteTopic(GCPResource):
     ):
         if pubsublite is None:
             raise ImportError(
-                "google-cloud-pubsub is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "google-cloud-pubsub is not installed. "
+                "Please install it with `pip install terrabridge[gcp]`."
             )
         if self._publisher is None:
             self._publisher = pubsublite.PublisherServiceClient()
