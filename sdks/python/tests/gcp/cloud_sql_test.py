@@ -1,4 +1,4 @@
-from mock import ANY, patch
+from unittest.mock import ANY, patch
 
 from terrabridge.gcp.cloud_sql import CloudSQLDatabase, CloudSQLInstance, CloudSQLUser
 

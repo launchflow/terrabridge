@@ -34,7 +34,8 @@ class PubSubTopic(GCPResource):
     def publish(self, message: bytes, ordering_key: str = "", **attributes):
         if pubsub_v1 is None:
             raise ImportError(
-                "google-cloud-pubsub is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "google-cloud-pubsub is not installed. "
+                "Please install it with `pip install terrabridge[gcp]`."
             )
         if self._publisher is None:
             self._publisher = pubsub_v1.PublisherClient()

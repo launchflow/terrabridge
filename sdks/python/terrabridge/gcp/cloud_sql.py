@@ -3,26 +3,36 @@ from typing import Optional
 from terrabridge.gcp.base import GCPResource
 
 try:
-    import asyncpg
-    import pg8000
-    import pymysql
-    import pytds
     from google.cloud.sql.connector import Connector, IPTypes, create_async_connector
-    from sqlalchemy import Engine, create_engine, engine
-    from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 except ImportError:
-    asyncpg = None
-    create_engine = None
-    Engine = None
-    engine = None
     Connector = None
     IPTypes = None
     create_async_connector = None
-    pytds = None
+try:
+    import asyncpg
+except ImportError:
+    asyncpg = None
+try:
+    import pg8000
+except ImportError:
     pg8000 = None
+try:
+    import pymysql
+except ImportError:
+    pymysql = None
+try:
+    import pytds
+except ImportError:
+    pytds = None
+try:
+    from sqlalchemy import Engine, create_engine, engine
+    from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
+except ImportError:
+    create_engine = None
+    Engine = None
+    engine = None
     create_async_engine = None
     AsyncEngine = None
-    pymysql = None
 
 
 class CloudSQLInstance(GCPResource):

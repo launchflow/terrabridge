@@ -11,16 +11,14 @@ repos:
       - id: debug-statements
       - id: no-commit-to-branch
         args: ["--branch", "main"]
-  - repo: https://github.com/psf/black
-    rev: 23.3.0
-    hooks:
-      - id: black
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.265
+    rev: v0.1.14
     hooks:
       - id: ruff
+        args: ["--fix", "sdks/python"]
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
         name: isort (python)
+        args: ["sdks/python"]

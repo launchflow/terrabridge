@@ -38,7 +38,8 @@ class SecretManagerSecret(GCPResource):
         """
         if secretmanager is None:
             raise ImportError(
-                "google-cloud-secret-manager is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "google-cloud-secret-manager is not installed. "
+                "Please install it with `pip install terrabridge[gcp]`."
             )
         if self._client is None:
             self._client = secretmanager.SecretManagerServiceClient()

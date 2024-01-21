@@ -20,13 +20,13 @@ jobs:
         uses: psf/black@stable
         with:
           options: "--check --verbose"
-          src: "buildflow"
+          src: "sdks/python"
           version: "~= 23.0"
           checkName: "test_and_lint" # NOTE: this needs to be the same as the job name
       - name: Run ruff checks
         uses: chartboost/ruff-action@v1
         with:
-          src: "buildflow"
+          src: "sdks/python"
           version: 0.0.265
           checkName: "test_and_lint"
         env:
@@ -50,11 +50,15 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
+          cd sdks/python
+          pip install poetry
           poetry install --all-extras
       - name: Test with pytest
         run: |
-          pytest --disable-warnings --cov
+          cd sdks/python
+          poetry run pytest --disable-warnings --cov
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        continue-on-error: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

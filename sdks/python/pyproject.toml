@@ -13,6 +13,13 @@ google-cloud-pubsub = { version = "*", extras = ["gcp"] }
 google-cloud-pubsublite = { version = "*", extras = ["gcp"] }
 cloud-sql-python-connector = { version = "*", extras = ["gcp"] }
 boto3 = { version = "*", extras = ["aws"] }
+pytest = {version = "^7.4.4", extras = ["dev"]}
+pytest-cov = {version = "^4.1.0", extras = ["dev"]}
+pg8000 = {version = "^1.30.4", extras = ["dev"]}
+python-tds = {version = "^1.14.0", extras = ["dev"]}
+pymysql = {version = "^1.1.0", extras = ["dev"]}
+sqlalchemy = {extras = ["dev"], version = "^2.0.25"}
+sqlalchemy-pytds = {version = "^1.0.0", extras = ["dev"]}
 
 
 [build-system]
