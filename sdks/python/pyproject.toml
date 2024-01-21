@@ -14,6 +14,7 @@ google-cloud-pubsublite = { version = "*", extras = ["gcp"] }
 cloud-sql-python-connector = { version = "*", extras = ["gcp"] }
 boto3 = { version = "*", extras = ["aws"] }
 pytest = {version = "^7.4.4", extras = ["dev"]}
+pytest-cov = {version = "^4.1.0", extras = ["dev"]}
 
 
 [build-system]
