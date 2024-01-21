@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "terrabridge"
+version = "0.1.0"
+description = ""
+authors = ["CalebTVanDyke <ctvandyke24@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+google-cloud-storage = {version = "*", extras = ["gcp"]}
+google-cloud-secret-manager = {version = "*", extras = ["gcp"]}
+google-cloud-pubsub = {version = "*", extras = ["gcp"]}
+google-cloud-pubsublite = {version = "*", extras = ["gcp"]}
+cloud-sql-python-connector = {version = "*", extras = ["gcp"]}
+boto3 = {version = "*", extras = ["aws"]}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
