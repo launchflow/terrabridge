@@ -3,11 +3,17 @@ from typing import Optional
 from terrabridge.gcp.base import GCPResource
 
 try:
+    from google.cloud.sql.connector import Connector, IPTypes, create_async_connector
+except ImportError:
+    Connector = None
+    IPTypes = None
+    create_async_connector = None
+
+try:
     import asyncpg
     import pg8000
     import pymysql
     import pytds
-    from google.cloud.sql.connector import Connector, IPTypes, create_async_connector
     from sqlalchemy import Engine, create_engine, engine
     from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 except ImportError:
@@ -15,9 +21,6 @@ except ImportError:
     create_engine = None
     Engine = None
     engine = None
-    Connector = None
-    IPTypes = None
-    create_async_connector = None
     pytds = None
     pg8000 = None
     create_async_engine = None
