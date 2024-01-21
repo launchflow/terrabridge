@@ -55,6 +55,7 @@ jobs:
           poetry install --all-extras
       - name: Test with pytest
         run: |
+          cd sdks/python
           poetry run pytest --disable-warnings --cov
 
       - name: Upload coverage reports to Codecov
