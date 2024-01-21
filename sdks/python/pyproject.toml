@@ -13,6 +13,7 @@ google-cloud-pubsub = { version = "*", extras = ["gcp"] }
 google-cloud-pubsublite = { version = "*", extras = ["gcp"] }
 cloud-sql-python-connector = { version = "*", extras = ["gcp"] }
 boto3 = { version = "*", extras = ["aws"] }
+pytest = {version = "^7.4.4", extras = ["dev"]}
 
 
 [build-system]

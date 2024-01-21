@@ -50,6 +50,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
+          cd sdks/python
+          pip install poetry
           poetry install --all-extras
       - name: Test with pytest
         run: |
