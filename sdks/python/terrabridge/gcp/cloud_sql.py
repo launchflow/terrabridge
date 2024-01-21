@@ -8,24 +8,31 @@ except ImportError:
     Connector = None
     IPTypes = None
     create_async_connector = None
-
 try:
     import asyncpg
+except ImportError:
+    asyncpg = None
+try:
     import pg8000
+except ImportError:
+    pg8000 = None
+try:
     import pymysql
+except ImportError:
+    pymysql = None
+try:
     import pytds
+except ImportError:
+    pytds = None
+try:
     from sqlalchemy import Engine, create_engine, engine
     from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 except ImportError:
-    asyncpg = None
     create_engine = None
     Engine = None
     engine = None
-    pytds = None
-    pg8000 = None
     create_async_engine = None
     AsyncEngine = None
-    pymysql = None
 
 
 class CloudSQLInstance(GCPResource):
