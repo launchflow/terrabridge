@@ -1,4 +1,4 @@
-from mock import patch
+from unittest.mock import patch
 
 from terrabridge.gcp.secret_manager import SecretManagerSecret
 
