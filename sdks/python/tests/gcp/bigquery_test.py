@@ -8,9 +8,8 @@ def test_bigquery_dataset():
 
     assert dataset.project == "terrabridge-testing"
     assert dataset.dataset_id == "terrabridge_testing_dataset"
-    assert (
-        dataset.id
-        == "projects/terrabridge-testing/datasets/terrabridge_testing_dataset"
+    assert dataset.id == (
+        "projects/terrabridge-testing/" "datasets/terrabridge_testing_dataset"
     )
 
 
@@ -22,9 +21,9 @@ def test_bigquery_table():
     assert table.project == "terrabridge-testing"
     assert table.dataset_id == "terrabridge_testing_dataset"
     assert table.table_id == "terrabridge-testing-table"
-    assert (
-        table.id
-        == "projects/terrabridge-testing/datasets/terrabridge_testing_dataset/tables/terrabridge-testing-table"
+    assert table.id == (
+        "projects/terrabridge-testing/datasets/"
+        "terrabridge_testing_dataset/tables/terrabridge-testing-table"
     )
     assert table.dataset.project == "terrabridge-testing"
 

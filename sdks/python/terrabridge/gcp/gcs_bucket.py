@@ -39,7 +39,8 @@ class GCSBucket(GCPResource):
         """
         if storage is None:
             raise ImportError(
-                "google-cloud-storage is not installed. Please install it with `pip install terrabridge[gcp]`."
+                "google-cloud-storage is not installed. "
+                "Please install it with `pip install terrabridge[gcp]`."
             )
         if self._client is None:
             self._client = storage.Client()

@@ -8,9 +8,8 @@ def test_bigtable_instance():
 
     assert instance.project == "terrabridge-testing"
     assert instance.name == "terrabridge-bigtable-instance"
-    assert (
-        instance.id
-        == "projects/terrabridge-testing/instances/terrabridge-bigtable-instance"
+    assert instance.id == (
+        "projects/terrabridge-testing/" "instances/terrabridge-bigtable-instance"
     )
 
 
@@ -22,8 +21,8 @@ def test_bigtable_table():
     assert table.project == "terrabridge-testing"
     assert table.instance_name == "terrabridge-bigtable-instance"
     assert table.name == "tf-table"
-    assert (
-        table.id
-        == "projects/terrabridge-testing/instances/terrabridge-bigtable-instance/tables/tf-table"
+    assert table.id == (
+        "projects/terrabridge-testing/instances"
+        "/terrabridge-bigtable-instance/tables/tf-table"
     )
     assert table.instance.project == "terrabridge-testing"

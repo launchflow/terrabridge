@@ -8,9 +8,9 @@ def test_pubsub_lite_topic():
 
     assert topic.project == "terrabridge-testing"
     assert topic.name == "example-lite-topic"
-    assert (
-        topic.id
-        == "projects/terrabridge-testing/locations/us-central1-a/topics/example-lite-topic"
+    assert topic.id == (
+        "projects/terrabridge-testing/locations"
+        "/us-central1-a/topics/example-lite-topic"
     )
 
 
@@ -21,7 +21,7 @@ def test_pubsub_lite_subscription():
 
     assert subscription.project == "terrabridge-testing"
     assert subscription.name == "example-lite-subscription"
-    assert (
-        subscription.id
-        == "projects/terrabridge-testing/locations/us-central1-a/subscriptions/example-lite-subscription"
+    assert subscription.id == (
+        "projects/terrabridge-testing/locations/"
+        "us-central1-a/subscriptions/example-lite-subscription"
     )

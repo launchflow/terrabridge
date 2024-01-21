@@ -8,7 +8,7 @@ def test_cloud_tasks_queue():
 
     assert queue.project == "terrabridge-testing"
     assert queue.name == "cloud-tasks-queue-test"
-    assert (
-        queue.id
-        == "projects/terrabridge-testing/locations/us-central1/queues/cloud-tasks-queue-test"
+    assert queue.id == (
+        "projects/terrabridge-testing/locations/"
+        "us-central1/queues/cloud-tasks-queue-test"
     )
