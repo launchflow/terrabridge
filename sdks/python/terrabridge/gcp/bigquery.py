@@ -1,3 +1,5 @@
+"""GCP BigQuery resources"""
+
 from typing import Optional
 
 from terrabridge.gcp.base import GCPResource
