@@ -1,3 +1,4 @@
+import terrabridge
 from terrabridge.gcp import GCSBucket
 from terrabridge.parser import _parse_terraform_state
 
@@ -6,6 +7,7 @@ from terrabridge.parser import _parse_terraform_state
 
 
 def test_parse_gcs_state():
+    terrabridge._anon_state_file_creds = True
     _parse_terraform_state("gs://terrabridge-testing/terraform.tfstate")
     bucket = GCSBucket(
         "bucket", state_file="gs://terrabridge-testing/terraform.tfstate"
@@ -14,6 +16,7 @@ def test_parse_gcs_state():
 
 
 def test_parse_s3_state():
+    terrabridge._anon_state_file_creds = True
     _parse_terraform_state("s3://terrabridge-testing/terraform.tfstate")
     bucket = GCSBucket(
         "bucket", state_file="s3://terrabridge-testing/terraform.tfstate"
