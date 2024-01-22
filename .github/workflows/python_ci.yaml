@@ -56,7 +56,12 @@ jobs:
       - name: Test with pytest
         run: |
           cd sdks/python
-          poetry run pytest --disable-warnings --cov
+          poetry run pytest
+
+      - name: Generate Report
+        run: |
+          cd sdks/python
+          poetry run coverage run -m unittest
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

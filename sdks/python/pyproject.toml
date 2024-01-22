@@ -20,6 +20,7 @@ python-tds = {version = "^1.14.0", extras = ["dev"]}
 pymysql = {version = "^1.1.0", extras = ["dev"]}
 sqlalchemy = {extras = ["dev"], version = "^2.0.25"}
 sqlalchemy-pytds = {version = "^1.0.0", extras = ["dev"]}
+coverage = {version = "^7.4.0", extras = ["dev"]}
 
 
 [build-system]
