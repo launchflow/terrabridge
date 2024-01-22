@@ -25,6 +25,7 @@ pytest-asyncio = {version = "^0.23.3", extras = ["dev"]}
 gcsfs = "*"
 s3fs = "*"
 fsspec = "*"
+asyncpg = {version = "^0.29.0", extras = ["dev"]}
 
 
 [build-system]
