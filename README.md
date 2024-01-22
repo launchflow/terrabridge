@@ -26,13 +26,13 @@ pip install terrabridge
 
 ### S3 Bucket
 
-Easy connect and read data from a S3 bucket, that is defined in terraform.
+Easily connect and read data from a S3 bucket, that is defined in terraform.
 
 TODO
 
 ### GCS Bucket
 
-Easy connect and read data from a GCS bucket, that is defined in terraform.
+Easily connect and read data from a GCS bucket, that is defined in terraform.
 
 **Python:**
 
@@ -71,7 +71,7 @@ resource "google_storage_bucket" "bucket" {
 
 ### Cloud SQL Postgres Database
 
-Use SQLAlchemy to connect to a Cloud SQL Postgres database with one function call.
+Use SQLAlchemy to connect to a managed Cloud SQL Postgres database with one function call.
 
 **Python:**
 
@@ -176,3 +176,4 @@ TODO: add links to docs
 - Secret Manager Secret
 
 ### AWS Supported Resources
+
