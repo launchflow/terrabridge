@@ -53,15 +53,15 @@ jobs:
           cd sdks/python
           pip install poetry
           poetry install --all-extras
-      - name: Test with pytest
-        run: |
-          cd sdks/python
-          poetry run pytest
+      # - name: Test with pytest
+      #   run: |
+      #     cd sdks/python
+      #     poetry run pytest
 
       - name: Generate Report
         run: |
           cd sdks/python
-          poetry run coverage run -m unittest
+          poetry run coverage run -m pytest
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
