@@ -25,12 +25,11 @@ try:
 except ImportError:
     pytds = None
 try:
-    from sqlalchemy import Engine, create_engine, engine
+    from sqlalchemy import Engine, create_engine
     from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 except ImportError:
     create_engine = None
     Engine = None
-    engine = None
     create_async_engine = None
     AsyncEngine = None
 
@@ -54,7 +53,7 @@ class CloudSQLInstance(GCPResource):
 
     _terraform_type = "google_sql_database_instance"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.connection_name: str = self._attributes["connection_name"]
         self.database_version: str = self._attributes["database_version"]
@@ -81,7 +80,7 @@ class CloudSQLUser(GCPResource):
 
     _terraform_type = "google_sql_user"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.name = self._attributes["name"]
         self.password = self._attributes["password"]
@@ -116,7 +115,7 @@ class CloudSQLDatabase(GCPResource):
 
     _terraform_type = "google_sql_database"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.name: str = self._attributes["name"]
         self.cloud_sql_instance: Optional[CloudSQLInstance] = None
@@ -197,7 +196,7 @@ class CloudSQLDatabase(GCPResource):
         return create_engine(url, creator=getconn, *engine_params)
 
     async def async_sqlalchemy_engine(
-        self, user: CloudSQLUser, ip_type: IPTypes, **engine_params
+        self, user: CloudSQLUser, ip_type: IPTypes = IPTypes.PUBLIC, **engine_params
     ) -> AsyncEngine:
         """Returns a SQLAlchemy engine for the database.
 

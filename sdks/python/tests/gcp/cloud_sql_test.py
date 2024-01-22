@@ -1,5 +1,7 @@
 from unittest.mock import ANY, patch
 
+import pytest
+
 from terrabridge.gcp.cloud_sql import CloudSQLDatabase, CloudSQLInstance, CloudSQLUser
 
 # TODO: add tests for sqlalchemy_engine and async_sqlalchemy_engine
@@ -118,3 +120,63 @@ def test_cloud_sql_database_sqlserver_sqlalchemy():
                 password=user.password,
                 db=database.name,
             )
+
+
+@pytest.mark.asyncio
+async def test_cloud_sql_database_postgres_async_sqlalchemy():
+    database = CloudSQLDatabase(
+        resource_name="database", state_file="tests/data/terraform.tfstate"
+    )
+    user = CloudSQLUser(resource_name="user", state_file="tests/data/terraform.tfstate")
+
+    with patch("terrabridge.gcp.cloud_sql.create_async_engine") as mock_create_engine:
+        with patch(
+            "terrabridge.gcp.cloud_sql.create_async_connector"
+        ) as mock_connector:
+            await database.async_sqlalchemy_engine(user)
+            mock_create_engine.assert_called_once_with(
+                "postgresql+asyncpg://", async_creator=ANY
+            )
+
+            creator = mock_create_engine.call_args.kwargs["async_creator"]
+            await creator()
+            mock_connector.return_value.connect_async.assert_called_once_with(
+                instance_connection_string=database.cloud_sql_instance.connection_name,
+                driver="asyncpg",
+                user=user.name,
+                password=user.password,
+                db=database.name,
+                ip_type=ANY,
+            )
+
+
+@pytest.mark.asyncio
+async def test_cloud_sql_database_mysql_async_sqlalchemy():
+    database = CloudSQLDatabase(
+        resource_name="mysql_database", state_file="tests/data/terraform.tfstate"
+    )
+    user = CloudSQLUser(
+        resource_name="mysql_user1", state_file="tests/data/terraform.tfstate"
+    )
+
+    try:
+        await database.async_sqlalchemy_engine(user)
+    except NotImplementedError:
+        return
+    raise AssertionError("Expected NotImplementedError")
+
+
+@pytest.mark.asyncio
+async def test_cloud_sql_database_sqlserver_async_sqlalchemy():
+    database = CloudSQLDatabase(
+        resource_name="sql_server_database", state_file="tests/data/terraform.tfstate"
+    )
+    user = CloudSQLUser(
+        resource_name="sql_server_user", state_file="tests/data/terraform.tfstate"
+    )
+
+    try:
+        await database.async_sqlalchemy_engine(user)
+    except NotImplementedError:
+        return
+    raise AssertionError("Expected NotImplementedError")

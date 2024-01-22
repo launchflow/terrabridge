@@ -21,7 +21,7 @@ class BigTableInstance(GCPResource):
 
     _terraform_type = "google_bigtable_instance"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.name: str = self._attributes["name"]
 
@@ -45,7 +45,7 @@ class BigTableTable(GCPResource):
 
     _terraform_type = "google_bigtable_table"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.instance: Optional[BigTableInstance] = None
         self.name: str = self._attributes["name"]

@@ -21,7 +21,7 @@ class BigQueryDataset(GCPResource):
 
     _terraform_type = "google_bigquery_dataset"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
 
 
@@ -44,7 +44,7 @@ class BigQueryTable(GCPResource):
 
     _terraform_type = "google_bigquery_table"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.dataset: Optional[BigQueryDataset] = None
         for dependency in self._dependencies:
