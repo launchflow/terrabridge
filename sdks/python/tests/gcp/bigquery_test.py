@@ -26,7 +26,6 @@ def test_bigquery_table():
         "terrabridge_testing_dataset/tables/terrabridge-testing-table"
     )
     assert table.dataset.project == "terrabridge-testing"
-    assert False
 
 
 def test_type_mismatch():
