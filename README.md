@@ -38,15 +38,18 @@ pip install terrabridge[aws]
 
 ### Basic Usage
 
-Terrabridge can be used by providing your statefile to the library. The state file can be local, stored in an S3 bucket, or in a GCS bucket. Terrabridge will then parse the state file into a python object that can be consumed by your application code.
+Terrabridge can be used by providing your state file to the library. The state file can be local, stored in an S3 bucket, or in a GCS bucket. Terrabridge will then parse the state file into a python object that can be consumed by your application code.
 
-For example if you had the below terraform code the creates and manages a GCS bucket you can easily access the bucket from your application code using the `GCSBucket` class. All terrabridge objects take in a state file and the name of the resource you assigned in terraform. All attributes that are available in terraform are now available on your terrabridge object.
+For example if you had the below terraform code that creates and manages a GCS bucket you can easily access the bucket from your application code using the `GCSBucket` class. All terrabridge objects take in a state file and the name of the resource you assigned in terraform. All attributes that are available in terraform are now available on your terrabridge object.
 
 ```python
 from terrabridge.gcp import GCSBucket
 
 bucket = GCSBucket("bucket", state_file="terraform.tfstate")
 # Fetches the remote bucket.
+print(bucket.url)
+print(bucket.id)
+print(bucket.name)
 bucket = bucket.bucket()
 print(bucket.get_iam_policy().bindings)
 ```
