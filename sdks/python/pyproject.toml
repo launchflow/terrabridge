@@ -6,20 +6,21 @@ authors = ["CalebTVanDyke <ctvandyke24@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 google-cloud-storage = { version = "*", extras = ["gcp"] }
 google-cloud-secret-manager = { version = "*", extras = ["gcp"] }
 google-cloud-pubsub = { version = "*", extras = ["gcp"] }
 google-cloud-pubsublite = { version = "*", extras = ["gcp"] }
 cloud-sql-python-connector = { version = "*", extras = ["gcp"] }
 boto3 = { version = "*", extras = ["aws"] }
-pytest = {version = "^7.4.4", extras = ["dev"]}
-pytest-cov = {version = "^4.1.0", extras = ["dev"]}
-pg8000 = {version = "^1.30.4", extras = ["dev"]}
-python-tds = {version = "^1.14.0", extras = ["dev"]}
-pymysql = {version = "^1.1.0", extras = ["dev"]}
-sqlalchemy = {extras = ["dev"], version = "^2.0.25"}
-sqlalchemy-pytds = {version = "^1.0.0", extras = ["dev"]}
+pytest = { version = "^7.4.4", extras = ["dev"] }
+pytest-cov = { version = "^4.1.0", extras = ["dev"] }
+pg8000 = { version = "^1.30.4", extras = ["dev"] }
+python-tds = { version = "^1.14.0", extras = ["dev"] }
+pymysql = { version = "^1.1.0", extras = ["dev"] }
+sqlalchemy = { extras = ["dev"], version = "^2.0.25" }
+sqlalchemy-pytds = { version = "^1.0.0", extras = ["dev"] }
+coverage = { version = "^7.4.0", extras = ["dev"] }
 
 
 [build-system]
