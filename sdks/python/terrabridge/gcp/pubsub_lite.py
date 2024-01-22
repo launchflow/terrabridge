@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from terrabridge.gcp.base import GCPResource
 
@@ -29,7 +29,7 @@ class PubSubLiteTopic(GCPResource):
     _terraform_type = "google_pubsub_lite_topic"
     _publisher = None
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.name: str = self._attributes["name"]
 
@@ -69,6 +69,6 @@ class PubSubLiteSubscription(GCPResource):
 
     _terraform_type = "google_pubsub_lite_subscription"
 
-    def __init__(self, resource_name: str, *, state_file: str) -> None:
+    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
         super().__init__(resource_name, state_file=state_file)
         self.name = self._attributes["name"]

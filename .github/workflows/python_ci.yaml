@@ -58,10 +58,11 @@ jobs:
         run: |
           cd sdks/python
           poetry run coverage run -m pytest
+          poetry run coverage xml -o coverage.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: sdks/python
-          files: .coverage
+          files: sdks/python/coverage.xml
+          name: python-${{ matrix.python-version }}

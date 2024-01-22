@@ -22,6 +22,18 @@ print(sec.version().decode("utf-8"))
 pip install terrabridge
 ```
 
+To use the GCP clients you will need to install the GCP extras:
+
+```bash
+pip install terrabridge[gcp]
+```
+
+To use the AWS clients you will need to install the AWS extras:
+
+```bash
+pip install terrabridge[aws]
+```
+
 ## Usage
 
 ### Basic Usage
@@ -227,4 +239,3 @@ TODO: add links to docs
 - Secret Manager Secret
 
 ### AWS Supported Resources
-

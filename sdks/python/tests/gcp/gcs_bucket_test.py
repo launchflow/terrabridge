@@ -1,5 +1,6 @@
 from unittest.mock import patch
 
+import terrabridge
 from terrabridge.gcp import GCSBucket
 
 # TODO: add tests for reading bucket
@@ -28,3 +29,21 @@ def test_gcs_bucket():
         mock.return_value.get_bucket.assert_called_once_with(
             "terrabridge-testing-terrabridge-testing"
         )
+
+
+def test_gcs_bucket_global_state_file():
+    try:
+        terrabridge.state_file = "tests/data/terraform.tfstate"
+        bucket = GCSBucket(resource_name="bucket")
+
+        assert bucket.url == "gs://terrabridge-testing-terrabridge-testing"
+    finally:
+        terrabridge.state_file = None
+
+
+def test_gcs_bucket_global_no_state_file():
+    try:
+        GCSBucket(resource_name="bucket")
+    except ValueError:
+        return
+    raise AssertionError("Expected ValueError")
