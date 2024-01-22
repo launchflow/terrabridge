@@ -165,3 +165,4 @@ terraform.tfstate
 terraform.tfstate.backup
 !sdks/python/tests/data/terraform.tfstate
 testing/
+coverage.xml
