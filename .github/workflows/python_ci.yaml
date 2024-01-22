@@ -63,6 +63,5 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: sdks/python
           files: sdks/python/.coverage
           name: python-${{ matrix.python-version }}
