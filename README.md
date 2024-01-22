@@ -22,6 +22,57 @@ print(sec.version().decode("utf-8"))
 pip install terrabridge
 ```
 
+## Usage
+
+### Basic Usage
+
+Terrabridge can be used by providing your statefile to the library. The state file can be local, stored in an S3 bucket, or in a GCS bucket. Terrabridge will then parse the state file into a python object that can be consumed by your application code.
+
+For example if you had the below terraform code the creates and manages a GCS bucket you can easily access the bucket from your application code using the `GCSBucket` class. All terrabridge objects take in a state file and the name of the resource you assigned in terraform. All attributes that are available in terraform are now available on your terrabridge object.
+
+```python
+from terrabridge.gcp import GCSBucket
+
+bucket = GCSBucket("bucket", state_file="terraform.tfstate")
+# Fetches the remote bucket.
+bucket = bucket.bucket()
+print(bucket.get_iam_policy().bindings)
+```
+
+```hcl
+resource "google_storage_bucket" "bucket" {
+    name = var.bucket_name
+    location = "US"
+}
+```
+
+### Global State File
+
+If all of your terrabridge objects use the same state file you can set a global state file, and avoid passing it to each object:
+
+```python
+import terrabridge
+from terrabridge.gcp import GCSBucket
+
+terrabridge.state_file="terraform.tfstate"
+
+bucket = GCSBucket("bucket")
+```
+
+### Remote State File
+
+If your state file is stored in an S3 bucket or GCS bucket you can pass the bucket name and key to the `state_file` argument. Terrabridge will then download the state file and parse it.
+
+```python
+
+from terrabridge.gcp import GCSBucket
+from terrabridge.aws import S3Bucket
+
+gcs_bucket = GCSBucket("bucket", state_file="gs://my-bucket/terraform.tfstate")
+s3_bucket = S3Bucket("bucket", state_file="s3://my-bucket/terraform.tfstate")
+```
+
+
 ## Examples
 
 ### S3 Bucket
