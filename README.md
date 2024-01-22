@@ -155,3 +155,24 @@ Python in the first language we support however we plan to support more language
 | **gcp**   | ✅          | ❌          | ❌        | ❌              |
 | **aws**   | 🚧          | ❌          | ❌        | ❌              |
 | **azure** | ❌          | ❌          | ❌        | ❌              |
+
+### GCP Supported Resources
+
+TODO: add links to docs
+
+- BigQuery Dataset
+- BigQuery Instance
+- BigTable Instance
+- BigTable Table
+- Cloud SQL Database Instance
+- Cloud SQL Database
+- Cloud SQL User
+- Cloud Tasks Queue
+- GCS Bucket
+- Pub/Sub Lite Topic
+- Pub/Sub Lite Subscription
+- Pub/Sub Topic
+- Pub/Sub Subscription
+- Secret Manager Secret
+
+### AWS Supported Resources
