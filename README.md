@@ -34,6 +34,16 @@ TODO
 
 Easy connect and read data from a GCS bucket, that is defined in terraform.
 
+**Python:**
+
+```python
+from terrabridge.gcp import GCSBucket
+
+bucket = GCSBucket("bucket", state_file="terraform.tfstate")
+bucket = bucket.bucket()
+print(bucket.get_iam_policy().bindings)
+```
+
 **Terraform:**
 ```hcl
 variable "gcp_project_id" {
@@ -59,19 +69,44 @@ resource "google_storage_bucket" "bucket" {
 }
 ```
 
-**Python:**
-
-```python
-from terrabridge.gcp import GCSBucket
-
-bucket = GCSBucket("bucket", state_file="terraform.tfstate")
-bucket = bucket.bucket()
-print(bucket.get_iam_policy().bindings)
-```
-
 ### Cloud SQL Postgres Database
 
 Use SQLAlchemy to connect to a Cloud SQL Postgres database with one function call.
+
+**Python:**
+
+```python
+import datetime
+import uuid
+
+from sqlalchemy import Column, DateTime, Integer, select
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase
+
+from terrabridge.gcp import CloudSQLDatabase, CloudSQLUser
+
+
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
+
+
+class StorageUser(Base):
+    __tablename__ = "users"
+
+    # Autopoluated fields
+    id = Column(Integer, primary_key=True, default=uuid.uuid4)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+
+db = CloudSQLDatabase("postgres_database", state_file="terraform.tfstate")
+user = CloudSQLUser("postgres_user", state_file="terraform.tfstate")
+engine = db.sqlalchemy_engine(user)
+
+Base.metadata.create_all(engine)
+
+conn = engine.connect()
+print(conn.execute(select(StorageUser)).all())
+```
 
 **Terraform:**
 
@@ -109,41 +144,6 @@ resource "google_sql_user" "postgres_user" {
     instance = google_sql_database_instance.postgres_sql_instance.name
     password = "terrabridge-testing-password"
 }
-```
-
-**Python:**
-
-```python
-import datetime
-import uuid
-
-from sqlalchemy import Column, DateTime, Integer, select
-from sqlalchemy.ext.asyncio import AsyncAttrs
-from sqlalchemy.orm import DeclarativeBase
-
-from terrabridge.gcp import CloudSQLDatabase, CloudSQLUser
-
-
-class Base(AsyncAttrs, DeclarativeBase):
-    pass
-
-
-class StorageUser(Base):
-    __tablename__ = "users"
-
-    # Autopoluated fields
-    id = Column(Integer, primary_key=True, default=uuid.uuid4)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-
-
-db = CloudSQLDatabase("postgres_database", state_file="terraform.tfstate")
-user = CloudSQLUser("postgres_user", state_file="terraform.tfstate")
-engine = db.sqlalchemy_engine(user)
-
-Base.metadata.create_all(engine)
-
-conn = engine.connect()
-print(conn.execute(select(StorageUser)).all())
 ```
 
 ## Supported Providers and Languages
