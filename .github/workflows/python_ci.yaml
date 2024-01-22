@@ -64,4 +64,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: sdks/python
-          files: .coverage
+          files: sdks/python/.coverage
+          name: python-${{ matrix.python-version }}
