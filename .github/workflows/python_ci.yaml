@@ -62,12 +62,8 @@ jobs:
         run: |
           cd sdks/python
           poetry run coverage run -m pytest
-          coverage report > ./coverage.txt
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          root_dir: sdks/python
-          file: ./coverage.txt
