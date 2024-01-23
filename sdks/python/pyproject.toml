@@ -1,9 +1,11 @@
 [tool.poetry]
 description = "terrabridge connects your terraform managed resources to your application."
 name = "terrabridge"
-version = "0.0.1.dev0"
+version = "0.0.1.dev1"
 authors = ["CalebTVanDyke <ctvandyke24@gmail.com>"]
-readme = "README.md"
+readme = "README.rst"
+exclude = ["tests", "examples"]
+license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -21,11 +23,11 @@ pymysql = { version = "^1.1.0", extras = ["dev"] }
 sqlalchemy = { extras = ["dev"], version = "^2.0.25" }
 sqlalchemy-pytds = { version = "^1.0.0", extras = ["dev"] }
 coverage = { version = "^7.4.0", extras = ["dev"] }
-pytest-asyncio = {version = "^0.23.3", extras = ["dev"]}
+pytest-asyncio = { version = "^0.23.3", extras = ["dev"] }
 gcsfs = "*"
 s3fs = "*"
 fsspec = "*"
-asyncpg = {version = "^0.29.0", extras = ["dev"]}
+asyncpg = { version = "^0.29.0", extras = ["dev"] }
 
 
 [build-system]

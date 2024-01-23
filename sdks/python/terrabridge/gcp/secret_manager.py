@@ -11,19 +11,27 @@ except ImportError:
 class SecretManagerSecret(GCPResource):
     """Represents a Secret Manager Secret
 
-    Parsed from the terraform resource: `google_secret_manager_secret`. For all
-    available attributes, see the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret).
+    Parsed from the terraform resource: ``google_secret_manager_secret``. For all
+    available attributes, see the `Terraform documentation <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret>`_.
 
-    Example usage:
+    Some attributes are pulled up to be top-level attributes for convenience for type hints.
+    However all attributes that are available in the Terraform state file are available.
 
-    ```python
-    from terrabridge.gcp import SecretManagerSecret
+    Example
+    -------
+    .. code:: python
 
-    secret = SecretManagerSecret("subscription", state_file="gs://my-bucket/terraform.tfstate")
-    print(secret.name)
+        from terrabridge.gcp import SecretManagerSecret
 
-    print(secret.version().decode("utf-8"))
-    ```
+        secret = SecretManagerSecret("subscription", state_file="gs://my-bucket/terraform.tfstate")
+        print(secret.name)
+
+        print(secret.version().decode("utf-8"))
+
+    Attributes:
+        project (str): The project the resource belongs to.
+        id (str): The id of the resource.
+        name (str): The name of the secret.
     """
 
     _client = None
@@ -36,7 +44,7 @@ class SecretManagerSecret(GCPResource):
     def version(self, version: str = "latest") -> bytes:
         """Fetches the secret version.
 
-        Requires terrabridge[gcp] to be installed.
+        Requires ``terrabridge[gcp]`` to be installed.
         """
         if secretmanager is None:
             raise ImportError(

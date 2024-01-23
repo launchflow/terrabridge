@@ -8,13 +8,21 @@ class Resource:
     _attributes = {}
     _terraform_type = None
 
-    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
+    def __init__(
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None,
+    ) -> None:
         if terrabridge.state_file is None and state_file is None:
             raise ValueError(
                 "state_file must be specified if terrabridge.state_file is not set."
             )
         self.resource_name = resource_name
-        resource = get_resource(resource_name, state_file or terrabridge.state_file)
+        resource = get_resource(
+            resource_name, module_name, state_file or terrabridge.state_file
+        )
         if resource["type"] != self._terraform_type:
             raise ValueError(
                 f"Resource {resource_name} is of type {resource['type']}, "

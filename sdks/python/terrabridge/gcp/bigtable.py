@@ -6,47 +6,77 @@ from terrabridge.gcp.base import GCPResource
 class BigTableInstance(GCPResource):
     """Represents a BigTable Instance
 
-    Parsed from the terraform resource: `google_bigtable_instance`. For all
-    available attributes, see the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigtable_instance).
+    Parsed from the terraform resource: ``google_bigtable_instance``. For all
+    available attributes, see the `Terraform documentation <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigtable_instance>`_.
 
-    Example usage:
+    Some attributes are pulled up to be top-level attributes for convenience for type hints.
+    However all attributes that are available in the Terraform state file are available.
 
-    ```python
-    from terrabridge.gcp import BigTableInstance
+    Example
+    -------
+    .. code:: python
 
-    bt_instance = BigTableInstance("instance", state_file="gs://my-bucket/terraform.tfstate")
-    print(instance.name)
-    ```
+        from terrabridge.gcp import BigTableInstance
+
+        bt_instance = BigTableInstance("instance", state_file="gs://my-bucket/terraform.tfstate")
+        print(instance.name)
+
+    Attributes:
+        project (str): The project the resource belongs to.
+        id (str): The id of the resource.
+        name (str): The name of the instance.
     """
 
     _terraform_type = "google_bigtable_instance"
 
-    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
-        super().__init__(resource_name, state_file=state_file)
+    def __init__(
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None
+    ) -> None:
+        super().__init__(resource_name, module_name=module_name, state_file=state_file)
         self.name: str = self._attributes["name"]
 
 
 class BigTableTable(GCPResource):
     """Represents a BigTable Table
 
-    Parsed from the terraform resource: `google_bigtable_table`. For all
-    available attributes, see the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigtable_table).
+    Parsed from the terraform resource: ``google_bigtable_table``. For all
+    available attributes, see the `Terraform documentation <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigtable_table>_`.
 
-    Example usage:
+    Some attributes are pulled up to be top-level attributes for convenience for type hints.
+    However all attributes that are available in the Terraform state file are available.
 
-    ```python
-    from terrabridge.gcp import BigTableTable
+    Example
+    -------
+    .. code:: python
 
-    table = BigTableTable("table", state_file="gs://my-bucket/terraform.tfstate")
-    print(table.name)
-    print(table.instance.name)
-    ```
+        from terrabridge.gcp import BigTableTable
+
+        table = BigTableTable("table", state_file="gs://my-bucket/terraform.tfstate")
+        print(table.name)
+        print(table.instance.name)
+
+    Attributes:
+        project (str): The project the resource belongs to.
+        id (str): The id of the resource.
+        name (str): The name of the table.
+        instance (BigTableInstance): The instance the table belongs to. Will only be
+            populated if the instance also exists in the state file.
     """
 
     _terraform_type = "google_bigtable_table"
 
-    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
-        super().__init__(resource_name, state_file=state_file)
+    def __init__(
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None
+    ) -> None:
+        super().__init__(resource_name, state_file=state_file, module_name=module_name)
         self.instance: Optional[BigTableInstance] = None
         self.name: str = self._attributes["name"]
         for dependency in self._dependencies:
