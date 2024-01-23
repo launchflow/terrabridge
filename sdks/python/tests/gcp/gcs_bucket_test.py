@@ -31,6 +31,19 @@ def test_gcs_bucket():
         )
 
 
+def test_gcs_bucket_module():
+    bucket = GCSBucket(
+        resource_name="bucket",
+        state_file="tests/data/terraform.tfstate",
+        module_name="module.bucket",
+    )
+
+    assert bucket.project == "terrabridge-testing"
+    assert bucket.url == "gs://terrabridge-testing-terrabridge-testing-module"
+    assert bucket.resource_name == "bucket"
+    assert bucket.name == "terrabridge-testing-terrabridge-testing-module"
+
+
 def test_gcs_bucket_global_state_file():
     try:
         terrabridge.state_file = "tests/data/terraform.tfstate"

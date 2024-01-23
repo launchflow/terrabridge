@@ -8,6 +8,10 @@ class GCSBucket:
     name: str
 
     def __init__(
-        self, resource_name: str, *, state_file: Optional[str] = None
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None,
     ) -> None: ...
     def bucket(self) -> storage.Bucket: ...

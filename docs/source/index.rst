@@ -1,24 +1,31 @@
-.. terrabridge documentation master file, created by
-   sphinx-quickstart on Mon Jan 22 10:25:46 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 terrabridge
 =======================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :hidden:
+    :caption: GCP Resources
+
+    gcp-resources/bigquery
+    gcp-resources/bigtable
+    gcp-resources/cloud_sql
+    gcp-resources/cloud_tasks
+    gcp-resources/gcs_bucket
+    gcp-resources/pubsub_lite
+    gcp-resources/pubsub
+    gcp-resources/secret_manager
+
 
 |license| |CI| |Python version| |codecov|
 
-.. |licence| image:: https://img.shields.io/pypi/l/terrabridge.svg
+.. |license| image:: https://img.shields.io/pypi/l/terrabridge.svg
     :target: https://pypi.python.org/pypi/terrabridge
 .. |CI| image:: https://github.com/launchflow/terrabridge/actions/workflows/python_ci.yaml/badge.svg
+    :target: https://github.com/launchflow/terrabridge/actions/workflows/python_ci.yaml
 .. |Python version| image:: https://badge.fury.io/py/terrabridge.svg
    :target: https://pypi.org/project/terrabridge
 .. |codecov| image:: https://codecov.io/gh/launchflow/terrabridge/graph/badge.svg?token=slFk4lUP2h
    :target: https://codecov.io/gh/launchflow/terrabridge
+
 
 Terrabridge bridges the gap between Terraform and applicatoin code. With
 Terrabridge you simply provide your terraform state file to the library
@@ -294,4 +301,5 @@ TODO: add links to docs
 
 AWS Supported Resources
 ~~~~~~~~~~~~~~~~~~~~~~~
+
  TODO

@@ -37,24 +37,39 @@ except ImportError:
 class CloudSQLInstance(GCPResource):
     """Represents a CloudSQL Instance
 
-    Parsed from the terraform resource: `google_sql_database_instance`. For all
-    available attributes, see the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance).
+    Parsed from the terraform resource: ``google_sql_database_instance``. For all
+    available attributes, see the `Terraform documentation <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance>`_.
 
+    Some attributes are pulled up to be top-level attributes for convenience for type hints.
+    However all attributes that are available in the Terraform state file are available.
 
-    Example usage:
+    Example
+    -------
+    .. code:: python
 
-    ```python
-    from terrabridge.gcp import CloudSQLInstance
+        from terrabridge.gcp import CloudSQLInstance
 
-    sql_instance = CloudSQLInstance("instance", state_file="gs://my-bucket/terraform.tfstate")
-    print(sql_instance.connection_name)
-    ```
+        sql_instance = CloudSQLInstance("instance", state_file="gs://my-bucket/terraform.tfstate")
+        print(sql_instance.connection_name)
+
+    Attributes:
+        project (str): The project the resource belongs to.
+        id (str): The id of the resource.
+        connection_name (str): The name of the instance.
+        database_version (str): The database version.
+        name (str): The name of the instance.
     """
 
     _terraform_type = "google_sql_database_instance"
 
-    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
-        super().__init__(resource_name, state_file=state_file)
+    def __init__(
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None,
+    ) -> None:
+        super().__init__(resource_name, module_name=module_name, state_file=state_file)
         self.connection_name: str = self._attributes["connection_name"]
         self.database_version: str = self._attributes["database_version"]
         self.name: str = self._attributes["name"]
@@ -63,25 +78,42 @@ class CloudSQLInstance(GCPResource):
 class CloudSQLUser(GCPResource):
     """Represents a CloudSQL User
 
-    Parsed from the terraform resource: `google_sql_user`. For all
-    available attributes, see the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user).
+    Parsed from the terraform resource: ``google_sql_user``. For all
+    available attributes, see the `Terraform documentation <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user>`_.
 
-    Example usage:
+    Some attributes are pulled up to be top-level attributes for convenience for type hints.
+    However all attributes that are available in the Terraform state file are available.
 
-    ```python
-    from terrabridge.gcp import CloudSQLUser
+    Example
+    -------
+    .. code:: python
 
-    sql_user = CloudSQLUser("user", state_file="gs://my-bucket/terraform.tfstate")
-    print(sql_user.name)
-    print(sql_user.password)
-    print(sql_user.cloud_sql_instance.name)
-    ```
+        from terrabridge.gcp import CloudSQLUser
+
+        sql_user = CloudSQLUser("user", state_file="gs://my-bucket/terraform.tfstate")
+        print(sql_user.name)
+        print(sql_user.password)
+        print(sql_user.cloud_sql_instance.name)
+
+    Attributes:
+        project (str): The project the resource belongs to.
+        id (str): The id of the resource.
+        name (str): The name of the user.
+        password (str): The password of the user.
+        cloud_sql_instance (str): The instance the user belongs to. Will only be populated
+            if the instance also exists in the state file.
     """
 
     _terraform_type = "google_sql_user"
 
-    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
-        super().__init__(resource_name, state_file=state_file)
+    def __init__(
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None,
+    ) -> None:
+        super().__init__(resource_name, module_name=module_name, state_file=state_file)
         self.name = self._attributes["name"]
         self.password = self._attributes["password"]
         self.cloud_sql_instance: Optional[CloudSQLInstance] = None
@@ -95,28 +127,44 @@ class CloudSQLUser(GCPResource):
 class CloudSQLDatabase(GCPResource):
     """Represents a CloudSQL Database
 
-    Parsed from the terraform resource: `google_sql_database`. For all
-    available attributes, see the [Terraform documentation](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database).
+    Parsed from the terraform resource: ``google_sql_database``. For all
+    available attributes, see the `Terraform documentation <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database>`_.
 
-    Example usage:
+    Some attributes are pulled up to be top-level attributes for convenience for type hints.
+    However all attributes that are available in the Terraform state file are available.
 
-    ```python
-    from terrabridge.gcp import CloudSQLDatabase
+    Example
+    -------
+    .. code:: python
 
-    database = CloudSQLDatabase("db", state_file="gs://my-bucket/terraform.tfstate")
-    print(database.name)
-    print(database.cloud_sql_instance.name)
+        from terrabridge.gcp import CloudSQLDatabase
 
-    user = CloudSQLUser("user", state_file="gs://my-bucket/terraform.tfstate")
-    engine = database.sqlalchemy_engine(user)
-    async_engine = await database.async_sqlalchemy_engine(user)
-    ```
+        database = CloudSQLDatabase("db", state_file="gs://my-bucket/terraform.tfstate")
+        print(database.name)
+        print(database.cloud_sql_instance.name)
+
+        user = CloudSQLUser("user", state_file="gs://my-bucket/terraform.tfstate")
+        engine = database.sqlalchemy_engine(user)
+        async_engine = await database.async_sqlalchemy_engine(user)
+
+    Attributes:
+        project (str): The project the resource belongs to.
+        id (str): The id of the resource.
+        name (str): The name of the database.
+        cloud_sql_instance (str): The instance the user belongs to. Will only be populated
+            if the instance also exists in the state file.
     """
 
     _terraform_type = "google_sql_database"
 
-    def __init__(self, resource_name: str, *, state_file: Optional[str] = None) -> None:
-        super().__init__(resource_name, state_file=state_file)
+    def __init__(
+        self,
+        resource_name: str,
+        *,
+        module_name: Optional[str] = None,
+        state_file: Optional[str] = None,
+    ) -> None:
+        super().__init__(resource_name, module_name=module_name, state_file=state_file)
         self.name: str = self._attributes["name"]
         self.cloud_sql_instance: Optional[CloudSQLInstance] = None
         for dependency in self._dependencies:
@@ -130,17 +178,18 @@ class CloudSQLDatabase(GCPResource):
     ) -> Engine:
         """Returns a SQLAlchemy engine for the database.
 
-        Requires terrabridge[gcp] and sqlalchemy to be installed, and whatever
+        Requires ``terrabridge[gcp]`` and ``sqlalchemy`` to be installed, and whatever
         driver is needed for the database version.
-            POSTGRES: pg8000
-            SQLSERVER: pytds
+            * ``POSTGRES``: ``pg8000``
+            * ``SQLSERVER``: ``pytds``
+            * ``MYSQL``: ``pymysql``
 
         Parameters:
             user: The user to connect to the database with.
             ip_type: The type of IP address to connect with and.
             engine_params: Additional parameters to pass to the SQLAlchemy engine.
 
-        returns:
+        Returns:
             A SQLAlchemy engine.
         """
         if create_engine is None:
@@ -200,14 +249,14 @@ class CloudSQLDatabase(GCPResource):
     ) -> AsyncEngine:
         """Returns a SQLAlchemy engine for the database.
 
-        Requires terrabridge[gcp] and sqlalchemy[asyncio] to be installed.
+        Requires ``terrabridge[gcp]`` and ``sqlalchemy[asyncio]`` to be installed.
 
         Parameters:
             user: The user to connect to the database with.
             ip_type: The type of IP address to connect with and.
             engine_params: Additional parameters to pass to the SQLAlchemy engine.
 
-        returns:
+        Returns:
             A SQLAlchemy engine.
         """
         if create_async_engine is None:

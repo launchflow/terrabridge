@@ -1,10 +1,11 @@
 [tool.poetry]
 description = "terrabridge connects your terraform managed resources to your application."
 name = "terrabridge"
-version = "0.0.1.dev0"
+version = "0.0.1.dev1"
 authors = ["CalebTVanDyke <ctvandyke24@gmail.com>"]
-readme = "README.md"
+readme = "README.rst"
 exclude = ["tests", "examples"]
+license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = "^3.8"
