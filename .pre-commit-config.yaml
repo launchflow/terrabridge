@@ -15,7 +15,7 @@ repos:
     rev: v0.1.14
     hooks:
       - id: ruff
-        args: ["--fix", "sdks/python"]
+        args: ["sdks/python"]
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
