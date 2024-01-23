@@ -180,9 +180,10 @@ class CloudSQLDatabase(GCPResource):
 
         Requires ``terrabridge[gcp]`` and ``sqlalchemy`` to be installed, and whatever
         driver is needed for the database version.
-            * ``POSTGRES``: ``pg8000``
-            * ``SQLSERVER``: ``pytds``
-            * ``MYSQL``: ``pymysql``
+
+        * ``POSTGRES``: ``pg8000``
+        * ``SQLSERVER``: ``pytds``
+        * ``MYSQL``: ``pymysql``
 
         Parameters:
             user: The user to connect to the database with.
