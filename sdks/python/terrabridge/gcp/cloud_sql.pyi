@@ -7,6 +7,8 @@ class CloudSQLInstance:
     connection_name: str
     database_version: str
     name: str
+    project: str
+    id: str
 
     def __init__(
         self,
@@ -20,6 +22,8 @@ class CloudSQLUser:
     name: str
     password: str
     cloud_sql_instance: Optional[CloudSQLInstance]
+    project: str
+    id: str
 
     def __init__(
         self,
@@ -32,6 +36,8 @@ class CloudSQLUser:
 class CloudSQLDatabase:
     name: str
     cloud_sql_instance: Optional[CloudSQLInstance]
+    project: str
+    id: str
 
     def __init__(
         self,

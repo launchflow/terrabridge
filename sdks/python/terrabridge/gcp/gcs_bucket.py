@@ -23,7 +23,7 @@ class GCSBucket(GCPResource):
 
         from terrabridge.gcp import GCSBucket
 
-        bucket = GCSBucket("queue", state_file="gs://my-bucket/terraform.tfstate")
+        bucket = GCSBucket("bucket", state_file="gs://my-bucket/terraform.tfstate")
         print(bucket.name)
 
         bucket.bucket().upload_from_filename("local_file.txt")

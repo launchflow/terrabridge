@@ -6,7 +6,7 @@ from terrabridge.gcp.secret_manager import SecretManagerSecret
 def test_secret_manager_secret():
     secret = SecretManagerSecret(
         resource_name="secret",
-        state_file="tests/data/terraform.tfstate",
+        state_file="tests/data/gcp/terraform.tfstate",
     )
 
     assert secret.project == "terrabridge-testing"

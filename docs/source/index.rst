@@ -14,6 +14,13 @@ terrabridge
     gcp-resources/pubsub
     gcp-resources/secret_manager
 
+.. toctree::
+    :hidden:
+    :caption: AWS Resources
+
+    aws-resources/s3_bucket
+    aws-resources/sqs_queue
+
 
 |license| |CI| |Python version| |codecov|
 

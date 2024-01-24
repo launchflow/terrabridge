@@ -11,9 +11,7 @@ provider "google" {
 
 resource "google_sql_database_instance" "postgres_sql_instance" {
     name = "terrabridge-testing-instance-mysql"
-    project = var.gcp_project_id
     database_version = "POSTGRES_15"
-    region = "us-central1"
     settings {
         tier = "db-custom-1-3840"
     }
@@ -21,13 +19,11 @@ resource "google_sql_database_instance" "postgres_sql_instance" {
 
 resource "google_sql_database" "postgres_database" {
     name = "terrabridge-testing-database"
-    project = var.gcp_project_id
     instance = google_sql_database_instance.postgres_sql_instance.name
 }
 
 resource "google_sql_user" "postgres_user" {
     name = "terrabridge-testing-user"
-    project = var.gcp_project_id
     instance = google_sql_database_instance.postgres_sql_instance.name
     password = "terrabridge-testing-password"
 }

@@ -3,7 +3,7 @@ from terrabridge.gcp.bigquery import BigQueryDataset, BigQueryTable
 
 def test_bigquery_dataset():
     dataset = BigQueryDataset(
-        resource_name="dataset", state_file="tests/data/terraform.tfstate"
+        resource_name="dataset", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert dataset.project == "terrabridge-testing"
@@ -15,7 +15,7 @@ def test_bigquery_dataset():
 
 def test_bigquery_table():
     table = BigQueryTable(
-        resource_name="table", state_file="tests/data/terraform.tfstate"
+        resource_name="table", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert table.project == "terrabridge-testing"
@@ -31,7 +31,8 @@ def test_bigquery_table():
 def test_type_mismatch():
     try:
         BigQueryTable(
-            resource_name="bigtable_table", state_file="tests/data/terraform.tfstate"
+            resource_name="bigtable_table",
+            state_file="tests/data/gcp/terraform.tfstate",
         )
     except ValueError:
         return

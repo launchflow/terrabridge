@@ -1,13 +1,12 @@
 from typing import Optional
 
-from google.cloud import storage
+from mypy_boto3_s3.service_resource import Bucket
 
-class GCSBucket:
-    _client: storage.Client
-    url: str
-    name: str
-    project: str
+class S3Bucket:
+    bucket: str
+    arn: str
     id: str
+    region: str
 
     def __init__(
         self,
@@ -16,4 +15,4 @@ class GCSBucket:
         module_name: Optional[str] = None,
         state_file: Optional[str] = None,
     ) -> None: ...
-    def bucket(self) -> storage.Bucket: ...
+    def fetch_bucket(self) -> Bucket: ...

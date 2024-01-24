@@ -5,7 +5,7 @@ from terrabridge.gcp import PubSubSubscription, PubSubTopic
 
 def test_pubsub_topic():
     topic = PubSubTopic(
-        resource_name="topic", state_file="tests/data/terraform.tfstate"
+        resource_name="topic", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert topic.project == "terrabridge-testing"
@@ -23,7 +23,7 @@ def test_pubsub_topic():
 
 def test_pubsub_subscription():
     subscription = PubSubSubscription(
-        resource_name="subscription", state_file="tests/data/terraform.tfstate"
+        resource_name="subscription", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert subscription.project == "terrabridge-testing"

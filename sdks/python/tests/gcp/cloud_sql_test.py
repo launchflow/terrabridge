@@ -9,7 +9,8 @@ from terrabridge.gcp.cloud_sql import CloudSQLDatabase, CloudSQLInstance, CloudS
 
 def test_cloud_sql_instance():
     instance = CloudSQLInstance(
-        resource_name="cloud_sql_instance", state_file="tests/data/terraform.tfstate"
+        resource_name="cloud_sql_instance",
+        state_file="tests/data/gcp/terraform.tfstate",
     )
 
     assert instance.project == "terrabridge-testing"
@@ -23,7 +24,7 @@ def test_cloud_sql_instance():
 
 def test_cloud_sql_database():
     database = CloudSQLDatabase(
-        resource_name="database", state_file="tests/data/terraform.tfstate"
+        resource_name="database", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert database.project == "terrabridge-testing"
@@ -37,7 +38,9 @@ def test_cloud_sql_database():
 
 
 def test_cloud_sql_user():
-    user = CloudSQLUser(resource_name="user", state_file="tests/data/terraform.tfstate")
+    user = CloudSQLUser(
+        resource_name="user", state_file="tests/data/gcp/terraform.tfstate"
+    )
 
     assert user.project == "terrabridge-testing"
     assert user.resource_name == "user"
@@ -52,9 +55,11 @@ def test_cloud_sql_user():
 
 def test_cloud_sql_database_postgres_sqlalchemy():
     database = CloudSQLDatabase(
-        resource_name="database", state_file="tests/data/terraform.tfstate"
+        resource_name="database", state_file="tests/data/gcp/terraform.tfstate"
     )
-    user = CloudSQLUser(resource_name="user", state_file="tests/data/terraform.tfstate")
+    user = CloudSQLUser(
+        resource_name="user", state_file="tests/data/gcp/terraform.tfstate"
+    )
 
     with patch("terrabridge.gcp.cloud_sql.create_engine") as mock_create_engine:
         with patch("terrabridge.gcp.cloud_sql.Connector") as mock_connector:
@@ -76,10 +81,10 @@ def test_cloud_sql_database_postgres_sqlalchemy():
 
 def test_cloud_sql_database_mysql_sqlalchemy():
     database = CloudSQLDatabase(
-        resource_name="mysql_database", state_file="tests/data/terraform.tfstate"
+        resource_name="mysql_database", state_file="tests/data/gcp/terraform.tfstate"
     )
     user = CloudSQLUser(
-        resource_name="mysql_user1", state_file="tests/data/terraform.tfstate"
+        resource_name="mysql_user1", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     with patch("terrabridge.gcp.cloud_sql.create_engine") as mock_create_engine:
@@ -100,10 +105,11 @@ def test_cloud_sql_database_mysql_sqlalchemy():
 
 def test_cloud_sql_database_sqlserver_sqlalchemy():
     database = CloudSQLDatabase(
-        resource_name="sql_server_database", state_file="tests/data/terraform.tfstate"
+        resource_name="sql_server_database",
+        state_file="tests/data/gcp/terraform.tfstate",
     )
     user = CloudSQLUser(
-        resource_name="sql_server_user", state_file="tests/data/terraform.tfstate"
+        resource_name="sql_server_user", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     with patch("terrabridge.gcp.cloud_sql.create_engine") as mock_create_engine:
@@ -125,9 +131,11 @@ def test_cloud_sql_database_sqlserver_sqlalchemy():
 @pytest.mark.asyncio
 async def test_cloud_sql_database_postgres_async_sqlalchemy():
     database = CloudSQLDatabase(
-        resource_name="database", state_file="tests/data/terraform.tfstate"
+        resource_name="database", state_file="tests/data/gcp/terraform.tfstate"
     )
-    user = CloudSQLUser(resource_name="user", state_file="tests/data/terraform.tfstate")
+    user = CloudSQLUser(
+        resource_name="user", state_file="tests/data/gcp/terraform.tfstate"
+    )
 
     with patch("terrabridge.gcp.cloud_sql.create_async_engine") as mock_create_engine:
         with patch(
@@ -153,10 +161,10 @@ async def test_cloud_sql_database_postgres_async_sqlalchemy():
 @pytest.mark.asyncio
 async def test_cloud_sql_database_mysql_async_sqlalchemy():
     database = CloudSQLDatabase(
-        resource_name="mysql_database", state_file="tests/data/terraform.tfstate"
+        resource_name="mysql_database", state_file="tests/data/gcp/terraform.tfstate"
     )
     user = CloudSQLUser(
-        resource_name="mysql_user1", state_file="tests/data/terraform.tfstate"
+        resource_name="mysql_user1", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     try:
@@ -169,10 +177,11 @@ async def test_cloud_sql_database_mysql_async_sqlalchemy():
 @pytest.mark.asyncio
 async def test_cloud_sql_database_sqlserver_async_sqlalchemy():
     database = CloudSQLDatabase(
-        resource_name="sql_server_database", state_file="tests/data/terraform.tfstate"
+        resource_name="sql_server_database",
+        state_file="tests/data/gcp/terraform.tfstate",
     )
     user = CloudSQLUser(
-        resource_name="sql_server_user", state_file="tests/data/terraform.tfstate"
+        resource_name="sql_server_user", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     try:
