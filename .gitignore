@@ -163,6 +163,6 @@ cython_debug/
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
-!sdks/python/tests/data/terraform.tfstate
+!sdks/python/tests/data/gcp/terraform.tfstate
 testing/
 coverage.xml

@@ -28,6 +28,7 @@ gcsfs = "*"
 s3fs = "*"
 fsspec = "*"
 asyncpg = { version = "^0.29.0", extras = ["dev"] }
+boto3-stubs = {extras = ["aws"], version = "^1.34.25"}
 
 
 [build-system]

@@ -3,8 +3,6 @@ from unittest.mock import patch
 import terrabridge
 from terrabridge.gcp import GCSBucket
 
-# TODO: add tests for reading bucket
-
 
 class _FakeBucket:
     pass
@@ -13,7 +11,7 @@ class _FakeBucket:
 def test_gcs_bucket():
     bucket = GCSBucket(
         resource_name="bucket",
-        state_file="tests/data/terraform.tfstate",
+        state_file="tests/data/gcp/terraform.tfstate",
     )
 
     assert bucket.project == "terrabridge-testing"
@@ -34,7 +32,7 @@ def test_gcs_bucket():
 def test_gcs_bucket_module():
     bucket = GCSBucket(
         resource_name="bucket",
-        state_file="tests/data/terraform.tfstate",
+        state_file="tests/data/gcp/terraform.tfstate",
         module_name="module.bucket",
     )
 
@@ -46,7 +44,7 @@ def test_gcs_bucket_module():
 
 def test_gcs_bucket_global_state_file():
     try:
-        terrabridge.state_file = "tests/data/terraform.tfstate"
+        terrabridge.state_file = "tests/data/gcp/terraform.tfstate"
         bucket = GCSBucket(resource_name="bucket")
 
         assert bucket.url == "gs://terrabridge-testing-terrabridge-testing"

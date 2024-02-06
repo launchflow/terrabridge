@@ -21,13 +21,11 @@ class Resource:
             )
         self.resource_name = resource_name
         resource = get_resource(
-            resource_name, module_name, state_file or terrabridge.state_file
+            resource_name,
+            module_name,
+            state_file or terrabridge.state_file,
+            self._terraform_type,
         )
-        if resource["type"] != self._terraform_type:
-            raise ValueError(
-                f"Resource {resource_name} is of type {resource['type']}, "
-                f"but expected {self._terraform_type}."
-            )
         self._attributes = resource["attributes"]
         self._dependencies = resource["dependencies"]
 

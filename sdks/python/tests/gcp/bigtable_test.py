@@ -3,7 +3,7 @@ from terrabridge.gcp.bigtable import BigTableInstance, BigTableTable
 
 def test_bigtable_instance():
     instance = BigTableInstance(
-        resource_name="bigtable_instance", state_file="tests/data/terraform.tfstate"
+        resource_name="bigtable_instance", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert instance.project == "terrabridge-testing"
@@ -15,7 +15,7 @@ def test_bigtable_instance():
 
 def test_bigtable_table():
     table = BigTableTable(
-        resource_name="bigtable_table", state_file="tests/data/terraform.tfstate"
+        resource_name="bigtable_table", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert table.project == "terrabridge-testing"

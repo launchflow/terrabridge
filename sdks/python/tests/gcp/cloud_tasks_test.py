@@ -3,7 +3,7 @@ from terrabridge.gcp.cloud_tasks import CloudTasksQueue
 
 def test_cloud_tasks_queue():
     queue = CloudTasksQueue(
-        resource_name="queue", state_file="tests/data/terraform.tfstate"
+        resource_name="queue", state_file="tests/data/gcp/terraform.tfstate"
     )
 
     assert queue.project == "terrabridge-testing"

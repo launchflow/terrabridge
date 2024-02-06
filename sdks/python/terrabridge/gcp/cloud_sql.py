@@ -1,6 +1,7 @@
 from typing import Optional
 
 from terrabridge.gcp.base import GCPResource
+from terrabridge.utils import parse_dependency
 
 try:
     from google.cloud.sql.connector import Connector, IPTypes, create_async_connector
@@ -118,9 +119,12 @@ class CloudSQLUser(GCPResource):
         self.password = self._attributes["password"]
         self.cloud_sql_instance: Optional[CloudSQLInstance] = None
         for dependency in self._dependencies:
-            if dependency.startswith(CloudSQLInstance._terraform_type):
+            dependency = parse_dependency(dependency)
+            if dependency.resource_type == CloudSQLInstance._terraform_type:
                 self.cloud_sql_instance = CloudSQLInstance(
-                    dependency.split(".")[1], state_file=state_file
+                    resource_name=dependency.resource_name,
+                    module_name=dependency.module,
+                    state_file=state_file,
                 )
 
 
@@ -168,9 +172,12 @@ class CloudSQLDatabase(GCPResource):
         self.name: str = self._attributes["name"]
         self.cloud_sql_instance: Optional[CloudSQLInstance] = None
         for dependency in self._dependencies:
-            if dependency.startswith(CloudSQLInstance._terraform_type):
+            dependency = parse_dependency(dependency)
+            if dependency.resource_type == CloudSQLInstance._terraform_type:
                 self.cloud_sql_instance = CloudSQLInstance(
-                    dependency.split(".")[1], state_file=state_file
+                    resource_name=dependency.resource_name,
+                    module_name=dependency.module,
+                    state_file=state_file,
                 )
 
     def sqlalchemy_engine(
@@ -181,9 +188,9 @@ class CloudSQLDatabase(GCPResource):
         Requires ``terrabridge[gcp]`` and ``sqlalchemy`` to be installed, and whatever
         driver is needed for the database version.
 
-        * ``POSTGRES``: ``pg8000``
-        * ``SQLSERVER``: ``pytds``
-        * ``MYSQL``: ``pymysql``
+        * ``POSTGRES``: ``pip install pg8000``
+        * ``SQLSERVER``: ``pip install pytds``
+        * ``MYSQL``: ``pip install pymysql``
 
         Parameters:
             user: The user to connect to the database with.

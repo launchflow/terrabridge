@@ -14,7 +14,6 @@ terrabridge
     gcp-resources/pubsub
     gcp-resources/secret_manager
 
-
 |license| |CI| |Python version| |codecov|
 
 .. |license| image:: https://img.shields.io/pypi/l/terrabridge.svg

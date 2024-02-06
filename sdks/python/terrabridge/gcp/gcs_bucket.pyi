@@ -6,6 +6,8 @@ class GCSBucket:
     _client: storage.Client
     url: str
     name: str
+    project: str
+    id: str
 
     def __init__(
         self,
